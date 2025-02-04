@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Querés ser mi San Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: background-color 2s ease-in-out;
+            animation: changeColors 10s infinite alternate;
+            background: url('https://media.istockphoto.com/id/1191251531/es/vector/patr%C3%B3n-sin-costuras-con-corazones-rojos-rom%C3%A1ntico-fondo-de-melocot%C3%B3n-cremoso-para-textil.jpg?s=612x612&w=0&k=20&c=b4Ddq7Vlc8iWhCXpoGPu6q1BtTPEtbAqe5iOSfM6Td8='); /* Fondo de corazones */
+            background-size: cover;
+        }
+        @keyframes changeColors {
+            0% { background-color: #8a2be2; }
+            50% { background-color: #9370db; }
+            100% { background-color: #dda0dd; }
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes { background-color: #ff69b4; color: white; }
+        .no { background-color: #ff4500; color: white; position: absolute; }
+        .hidden { display: none; }
+        .gif-container {
+            margin-top: 20px;
+        }
+        .heart-rain {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
+            opacity: 0.8;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¿Querés ser mi San Valentín? ❤️</h1>
+        <img src="https://i.pinimg.com/736x/33/8e/ae/338eae0b50da6fe23812bd864d8ea543.jpg" alt="Stitch" width="150">
+        <br>
+        <button class="btn yes" onclick="showLove()">Sí 💖</button>
+        <button class="btn no" onclick="moveNo()" id="noBtn">No 💔</button>
+        <h2 id="response" class="hidden">¡Sabía que ibas a decir que sí! 💕</h2>
+        <div class="gif-container hidden" id="gifContainer">
+            <img src="https://i.pinimg.com/originals/a3/ea/1d/a3ea1d42f39cb6a573301d2ff123247d.gif" alt="Stitch y su novia" width="200">
+        </div>
+        <div class="hidden" id="buzzContainer">
+            <h2>¡Te amo hasta el infinito y más allá! 🚀</h2>
+            <img src="http://revistadossier.com.uy/wp-content/uploads/2020/02/toy-story.jpg" alt="Buzz Lightyear" width="200">
+        </div>
+        <div class="heart-rain" id="heartRain"></div>
+    </div>
+    <script>
+        function showLove() {
+            document.getElementById('response').classList.remove('hidden');
+            document.getElementById('gifContainer').classList.remove('hidden');
+            createHearts();
+            setTimeout(() => {
+                document.getElementById('buzzContainer').classList.remove('hidden');
+            }, 3000);
+        }
+        function moveNo() {
+            let btn = document.getElementById('noBtn');
+            btn.style.top = Math.random() * window.innerHeight + 'px';
+            btn.style.left = Math.random() * window.innerWidth + 'px';
+        }
+        function createHearts() {
+            let heartRain = document.getElementById('heartRain');
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heartRain.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
